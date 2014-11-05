@@ -7,6 +7,7 @@ public class MainApp {
 	private static Course arrayAuthor[] = new Author[10];
 	private static int numUsers = 0;
 	private static int numCourses = 0;
+	private static int id = -1;
 	private static BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
 	/**
 	 * Main function
@@ -56,6 +57,21 @@ public class MainApp {
 					
 					break;
 					
+				case 6:
+					
+					addNewAuthor();
+					
+					
+				break;
+					
+					
+				case 7:
+					
+					deleteAuthor(id);
+					
+					
+				break;
+					
 			case 0:
 				break;
 			}
@@ -80,6 +96,8 @@ public class MainApp {
 			System.out.println("3. - Delete User (TODO)");
 			System.out.println("4. - Add new course");
 			System.out.println("5. - Delete course");
+			System.out.println("6. - add author");
+			System.out.println("7. - Delete author");
 			System.out.println("0. - Exit");
 			try{
 				String option = buffer.readLine();	
