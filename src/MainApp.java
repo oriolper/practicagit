@@ -3,9 +3,11 @@ import java.io.*;
 public class MainApp {
 
 	private static User arrayUsers[] = new User[10];
+	private static Singers arraySingers[] = new Singers[10];
 	private static Course arrayCourses[] = new Course[10];
 	private static int numUsers = 0;
 	private static int numCourses = 0;
+	private static int numSingers = 0;
 	private static BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
 	/**
 	 * Main function
@@ -17,46 +19,43 @@ public class MainApp {
 		int option = showMenu();
 		while(option != 0){
 			switch(option){
-			case 1:
-				User u = addNewUser();
-				arrayUsers[numUsers] = u;					
-				numUsers++;
-				break;
-			case 2:
-				boolean readingError;
-				do{ 
-					System.out.println("Which user? (insert array index)");
-					BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
-					try{
-						int index = Integer.parseInt(buffer.readLine());
-						modifyUser(arrayUsers[index]);
-						readingError = false;
-					}catch(Exception e){
-						System.out.println("There is no user in the given index");
-						readingError = true;
-					}
-				}while(readingError);
-				break;
-			case 3:
-				break;
-					
+				case 1:
+						User u = addNewUser();
+						arrayUsers[numUsers] = u;					
+						numUsers++;
+					break;
+				case 2:
+						boolean readingError;
+						do{ 
+							System.out.println("Which user? (insert array index)");
+							BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
+							try{
+								int index = Integer.parseInt(buffer.readLine());
+								modifyUser(arrayUsers[index]);
+								readingError = false;
+							}catch(Exception e){
+								System.out.println("There is no user in the given index");
+								readingError = true;
+							}
+						}while(readingError);
+					break;
+				case 3:
+					break;
 				case 4:
-					
-					Course c= addNewCourse();
-					arrayCourses[numCourses] = c;					
-					numCourses++;
-					
+						Course c= addNewCourse();
+						arrayCourses[numCourses] = c;					
+						numCourses++;
 					break;
-					
-				case 5:
-					
-					deleteCourse();
-					
-					
+				case 5:					
+						deleteCourse();					
 					break;
-					
-			case 0:
-				break;
+				case 6:
+						Singers s = addNewSinger();
+						arraySingers[numSingers] = s;					
+						numSingers++;
+					break;
+				case 0:
+					break;
 			}
 			option = showMenu();
 		}
@@ -79,6 +78,7 @@ public class MainApp {
 			System.out.println("3. - Delete User (TODO)");
 			System.out.println("4. - Add new course");
 			System.out.println("5. - Delete course");
+			System.out.println("6. - Add singer");
 			System.out.println("0. - Exit");
 			try{
 				String option = buffer.readLine();	
@@ -191,6 +191,30 @@ public class MainApp {
 			System.out.println("ID does not exists");
 		}
 		
+	}
+	
+	public static Singer addNewSinger() {
+
+		int id, age; id = age = -1;
+		String name, firstSong; name = firstSong = "";
+		boolean readingError;
+		do {
+			try{
+				System.out.println("id:");
+				id = Integer.parseInt(buffer.readLine());
+				System.out.println("Name:");
+				name = buffer.readLine();
+				System.out.println("First Song:");
+				firstSong = buffer.readLine();
+				System.out.println("age:");
+				age = Integer.parseInt(buffer.readLine());
+				readingError = false;
+			}catch(Exception e){
+				System.out.println("Incorrect value!!");
+				readingError = true;
+			}
+		} while(readingError);
+		return new User(id, name, firstSong, age);
 	}
 	
 }
