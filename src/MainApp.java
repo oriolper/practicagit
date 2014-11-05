@@ -3,8 +3,10 @@ import java.io.*;
 public class MainApp {
 
 	private static User arrayUsers[] = new User[10];
+	private static Actor arrayActors[] = new Actor[10];
 	private static Course arrayCourses[] = new Course[10];
 	private static int numUsers = 0;
+	private static int numActors = 0;
 	private static int numCourses = 0;
 	private static BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
 	/**
@@ -55,6 +57,31 @@ public class MainApp {
 					
 					break;
 					
+					case 6:
+					//add
+						Actor a = addNewActor();
+						arrayActors[numActors] = a;					
+						numActors++;
+					break;
+					
+					case 7:
+							//modify
+							boolean readingError2=true;
+						do{ 
+							System.out.println("Which actor? (insert array index)");
+							BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
+							try{
+								int index = Integer.parseInt(buffer.readLine());
+								modifyActor(arrayActors[index]);
+								readingError2 = false;
+							}catch(Exception e){
+								System.out.println("There is no user in the given index");
+								readingError2= true;
+							}
+						}while(readingError2);
+					break;
+					
+					
 			case 0:
 				break;
 			}
@@ -79,6 +106,8 @@ public class MainApp {
 			System.out.println("3. - Delete User (TODO)");
 			System.out.println("4. - Add new course");
 			System.out.println("5. - Delete course");
+			System.out.println("6. - Add new Actor");
+			System.out.println("7. - Modify exiting Actor");
 			System.out.println("0. - Exit");
 			try{
 				String option = buffer.readLine();	
@@ -142,19 +171,6 @@ public class MainApp {
 		}
 
 	}
-
-
-	public static void deleteUser(int id) {
-		
-		for (int i = 0; i < arrayUsers.length; i++) {
-			
-			if(id==arrayUsers[i].getId()) {
-				arrayUsers[i]=null;
-			}
-			
-		}
-		
-	}
 	
 	public static Course addNewCourse() {
 		int id=0;
@@ -191,6 +207,55 @@ public class MainApp {
 			System.out.println("ID does not exists");
 		}
 		
+	}
+	
+	public static Actor addNewActor() {
+
+		int id, age; id = age = -1;
+		String name, surname; name = surname = "";
+		boolean readingError;
+		do {
+			try{
+				System.out.println("id:");
+				id = Integer.parseInt(buffer.readLine());
+				System.out.println("Name:");
+				name = buffer.readLine();
+				System.out.println("Surname:");
+				surname = buffer.readLine();
+				System.out.println("age:");
+				age = Integer.parseInt(buffer.readLine());
+				readingError = false;
+			}catch(Exception e){
+				System.out.println("Incorrect value!!");
+				readingError = true;
+			}
+		} while(readingError);
+		return new Actor(id, name, surname, age);
+	}
+	
+	public static void modifyActor(Actor actor){
+		System.out.println("===== Current user data =====");
+		System.out.println(actor.toString());
+		System.out.println("===== Insert new data =====");
+		Actor newOne = addNewActor();
+		actor.setId(newOne.getId());
+		actor.setName(newOne.getName());
+		actor.setSurname(newOne.getSurname());
+		actor.setAge(newOne.getAge());
+		System.out.println("Changes done!");
+	}
+	
+	
+	public static void deleteActor(int id) {
+
+		for (int i = 0; i < arrayActors.length; i++) {
+
+			if(id==arrayActors[i].getId()) {
+				arrayActors[i]=null;
+			}
+
+		}
+
 	}
 	
 }
