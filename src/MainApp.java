@@ -6,6 +6,7 @@ public class MainApp {
 	private static Course arrayCourses[] = new Course[10];
 	private static int numUsers = 0;
 	private static int numCourses = 0;
+	private static albums arrayAlbums[] = new albums[10];
 	private static BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
 	/**
 	 * Main function
@@ -54,6 +55,11 @@ public class MainApp {
 					
 					
 					break;
+				case 12:
+				  albums c= addNewAlbums();
+					arrayAlbums[numAlbums] = c;					
+					numAlbums++;
+				   break;
 					
 			case 0:
 				break;
@@ -79,6 +85,7 @@ public class MainApp {
 			System.out.println("3. - Delete User (TODO)");
 			System.out.println("4. - Add new course");
 			System.out.println("5. - Delete course");
+			System.out.println("12. - Add Albums");
 			System.out.println("0. - Exit");
 			try{
 				String option = buffer.readLine();	
@@ -191,6 +198,25 @@ public class MainApp {
 			System.out.println("ID does not exists");
 		}
 		
+	}
+
+public static albums addNewAlbums() {
+		int id=0;
+		String name="";
+		boolean readingError;
+		do {
+			try{
+				System.out.println("id:");
+				id = Integer.parseInt(buffer.readLine());
+				System.out.println("Name:");
+				name = buffer.readLine();
+				readingError = false;
+			}catch(Exception e){
+				System.out.println("Incorrect value!!");
+				readingError = true;
+			}
+		} while(readingError);
+		return new albums(id, name);
 	}
 	
 }
