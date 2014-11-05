@@ -4,8 +4,11 @@ public class MainApp {
 
 	private static User arrayUsers[] = new User[10];
 	private static Course arrayCourses[] = new Course[10];
+	private static Films arrayFilms[] = new Films[10];
+	private static int numFilms = 0;
 	private static int numUsers = 0;
 	private static int numCourses = 0;
+	private static int i = 0;
 	private static BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
 	/**
 	 * Main function
@@ -51,10 +54,18 @@ public class MainApp {
 				case 5:
 					
 					deleteCourse();
-					
-					
 					break;
 					
+				case 6:
+					
+				addFilm();
+				break;
+				
+				case 7:
+					
+				deleteFilm();
+				break;				
+				
 			case 0:
 				break;
 			}
@@ -79,6 +90,8 @@ public class MainApp {
 			System.out.println("3. - Delete User (TODO)");
 			System.out.println("4. - Add new course");
 			System.out.println("5. - Delete course");
+			System.out.println("6. - Add new film");
+			System.out.println("7. - Delete film");
 			System.out.println("0. - Exit");
 			try{
 				String option = buffer.readLine();	
@@ -143,18 +156,6 @@ public class MainApp {
 
 	}
 
-
-	public static void deleteUser(int id) {
-		
-		for (int i = 0; i < arrayUsers.length; i++) {
-			
-			if(id==arrayUsers[i].getId()) {
-				arrayUsers[i]=null;
-			}
-			
-		}
-		
-	}
 	
 	public static Course addNewCourse() {
 		int id=0;
@@ -184,6 +185,51 @@ public class MainApp {
 			for(int i=0;i<arrayCourses.length;i++) {
 				if(id == arrayCourses[i].getId()) {
 					arrayCourses[i]=null;
+				}
+			}
+
+		}catch(Exception e) {
+			System.out.println("ID does not exists");
+		}
+		
+	}
+	
+	
+	public static Films addFilm() {
+
+		int id, year; id = year = -1;
+		String tittle, Director; tittle = Director = "";
+		boolean readingError;
+		do {
+			try{
+				System.out.println("id:");
+				id = Integer.parseInt(buffer.readLine());
+				System.out.println("Title:");
+				tittle = buffer.readLine();
+				System.out.println("Director:");
+				Director = buffer.readLine();
+				System.out.println("Year:");
+				year = Integer.parseInt(buffer.readLine());
+				
+				readingError = false;
+			}catch(Exception e){
+				System.out.println("Incorrect value!!");
+				readingError = true;
+			}
+		} while(readingError);
+		return new Films(id, tittle, Director, year);
+	}
+	
+	
+	public static void deleteFilm() throws IOException {
+		try {
+
+			System.out.println("Please enter the id");
+			int id=Integer.parseInt(buffer.readLine());
+
+			for(int i=0;i<arrayFilms.length;i++) {
+				if(arrayFilms[i]!=null && id == arrayFilms[i].getId()) {
+					arrayFilms[i]=null;
 				}
 			}
 
