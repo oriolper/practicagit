@@ -4,8 +4,11 @@ public class MainApp {
 
 	private static User arrayUsers[] = new User[10];
 	private static Course arrayCourses[] = new Course[10];
+	private static Games arrayGames[] = new Games[10];
 	private static int numUsers = 0;
 	private static int numCourses = 0;
+	private static int numGames = 0;
+	private static int i = 0;
 	private static BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
 	/**
 	 * Main function
@@ -55,6 +58,22 @@ public class MainApp {
 					
 					break;
 					
+				case 6:
+					
+					Games g = addNewGame();
+					arrayGames[numGames] = g;
+					numGames++;
+					break;
+					
+				case 7:
+					
+					System.out.println("Insert id of the game to delete");
+					int gameid = Integer.parseInt(buffer.readLine());
+					
+					deleteGame(gameid);
+					
+					break;
+					
 			case 0:
 				break;
 			}
@@ -79,6 +98,8 @@ public class MainApp {
 			System.out.println("3. - Delete User (TODO)");
 			System.out.println("4. - Add new course");
 			System.out.println("5. - Delete course");
+			System.out.println("6. - Add game");
+			System.out.println("7. - Delete game");
 			System.out.println("0. - Exit");
 			try{
 				String option = buffer.readLine();	
@@ -143,18 +164,6 @@ public class MainApp {
 
 	}
 
-
-	public static void deleteUser(int id) {
-		
-		for (int i = 0; i < arrayUsers.length; i++) {
-			
-			if(id==arrayUsers[i].getId()) {
-				arrayUsers[i]=null;
-			}
-			
-		}
-		
-	}
 	
 	public static Course addNewCourse() {
 		int id=0;
@@ -191,6 +200,38 @@ public class MainApp {
 			System.out.println("ID does not exists");
 		}
 		
+	}
+	
+	
+	public static Games addNewGame() {
+		int id=0;
+		String name="";
+		boolean readingError;
+		do {
+			try{
+				System.out.println("id:");
+				id = Integer.parseInt(buffer.readLine());
+				System.out.println("Name:");
+				name = buffer.readLine();
+				readingError = false;
+			}catch(Exception e){
+				System.out.println("Incorrect value!!");
+				readingError = true;
+			}
+		} while(readingError);
+		return new Games(id, name);
+	}
+	
+	public static void deleteGame(int id) {
+
+		for (int i = 0; i < arrayGames.length; i++) {
+
+			if(id==arrayGames[i].getId()) {
+				arrayGames[i]=null;
+			}
+
+		}
+
 	}
 	
 }
