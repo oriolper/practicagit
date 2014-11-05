@@ -54,6 +54,9 @@ public class MainApp {
 						arraySingers[numSingers] = s;					
 						numSingers++;
 					break;
+				case 5:					
+						deleteSinger();					
+					break;
 				case 0:
 					break;
 			}
@@ -79,6 +82,7 @@ public class MainApp {
 			System.out.println("4. - Add new course");
 			System.out.println("5. - Delete course");
 			System.out.println("6. - Add singer");
+			System.out.println("7. - Delete singer");
 			System.out.println("0. - Exit");
 			try{
 				String option = buffer.readLine();	
@@ -217,4 +221,15 @@ public class MainApp {
 		return new User(id, name, firstSong, age);
 	}
 	
+	public static void deleteSinger() throws IOException {
+		System.out.println("Please enter the id");
+		int id=Integer.parseInt(buffer.readLine());
+
+		for(int i=0;i<arraySingers.length;i++) {
+			if(id == arraySingers[i].getId()) {
+				arraySingers[i]=null;
+			}
+		}
+
+	}
 }
