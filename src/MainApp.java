@@ -4,8 +4,10 @@ public class MainApp {
 
 	private static User arrayUsers[] = new User[10];
 	private static Course arrayCourses[] = new Course[10];
+	private static Hams arrayHams[] = new Hams[10];
 	private static int numUsers = 0;
 	private static int numCourses = 0;
+	private static int i = 0;
 	private static BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
 	/**
 	 * Main function
@@ -142,19 +144,6 @@ public class MainApp {
 		}
 
 	}
-
-
-	public static void deleteUser(int id) {
-		
-		for (int i = 0; i < arrayUsers.length; i++) {
-			
-			if(id==arrayUsers[i].getId()) {
-				arrayUsers[i]=null;
-			}
-			
-		}
-		
-	}
 	
 	public static Course addNewCourse() {
 		int id=0;
@@ -184,6 +173,43 @@ public class MainApp {
 			for(int i=0;i<arrayCourses.length;i++) {
 				if(id == arrayCourses[i].getId()) {
 					arrayCourses[i]=null;
+				}
+			}
+
+		}catch(Exception e) {
+			System.out.println("ID does not exists");
+		}
+		
+	}
+	
+	public static Hams addNewHam() {
+		int id=0;
+		String marca="";
+		boolean readingError;
+		do {
+			try{
+				System.out.println("id(codigo de barras):");
+				id = Integer.parseInt(buffer.readLine());
+				System.out.println("Marca:");
+				marca = buffer.readLine();
+				readingError = false;
+			}catch(Exception e){
+				System.out.println("Incorrect value!!");
+				readingError = true;
+			}
+		} while(readingError);
+		return new Hams(id, marca);
+	}
+	
+	public static void deleteHam() throws IOException {
+		try {
+
+			System.out.println("Please enter the id(codigo de barras)");
+			int id=Integer.parseInt(buffer.readLine());
+
+			for(int i=0;i<arrayHams.length;i++) {
+				if(id == arrayHams[i].getId()) {
+					arrayHams[i]=null;
 				}
 			}
 
