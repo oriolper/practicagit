@@ -54,6 +54,9 @@ public class MainApp {
 					
 					
 					break;
+				case 6:
+					
+					addNewUsuarios();
 					
 			case 0:
 				break;
@@ -79,6 +82,7 @@ public class MainApp {
 			System.out.println("3. - Delete User (TODO)");
 			System.out.println("4. - Add new course");
 			System.out.println("5. - Delete course");
+			System.out.println("6. - Add new user-2");
 			System.out.println("0. - Exit");
 			try{
 				String option = buffer.readLine();	
@@ -117,6 +121,19 @@ public class MainApp {
 			}
 		} while(readingError);
 		return new User(id, name, surname, age);
+	}
+	
+	public static Usuarios addNewUsuarios()
+	{
+		String usuaio, contra;
+		int id;
+		System.out.println("id:");
+		id = Integer.parseInt(buffer.readLine());
+		System.out.println("Usuario:");
+		usuario = buffer.readLine();
+		System.out.println("Contraseña:");
+		contra = buffer.readLine();
+		return new Usuarios(id, usuario, contra);
 	}
 	
 	public static void modifyUser(User user){
@@ -192,5 +209,6 @@ public class MainApp {
 		}
 		
 	}
+	
 	
 }
