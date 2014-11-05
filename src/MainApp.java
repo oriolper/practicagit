@@ -4,6 +4,7 @@ public class MainApp {
 
 	private static User arrayUsers[] = new User[10];
 	private static Course arrayCourses[] = new Course[10];
+	private static Course arrayAuthor[] = new Author[10];
 	private static int numUsers = 0;
 	private static int numCourses = 0;
 	private static BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
@@ -191,6 +192,30 @@ public class MainApp {
 			System.out.println("ID does not exists");
 		}
 		
+	}
+	
+	public static Author addNewAuthor() {
+
+		int id, age; id = age = -1;
+		String name, surname; name = surname = "";
+		boolean readingError;
+		do {
+			try{
+				System.out.println("id:");
+				id = Integer.parseInt(buffer.readLine());
+				System.out.println("Name:");
+				name = buffer.readLine();
+				System.out.println("Surname:");
+				surname = buffer.readLine();
+				System.out.println("age:");
+				age = Integer.parseInt(buffer.readLine());
+				readingError = false;
+			}catch(Exception e){
+				System.out.println("Incorrect value!!");
+				readingError = true;
+			}
+		} while(readingError);
+		return new Author(id, name, surname, age);
 	}
 	
 }
