@@ -7,6 +7,7 @@ public class MainApp {
 	private static Hams arrayHams[] = new Hams[10];
 	private static int numUsers = 0;
 	private static int numCourses = 0;
+	private static int numHams = 0;
 	private static int i = 0;
 	private static BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
 	/**
@@ -41,22 +42,37 @@ public class MainApp {
 				break;
 			case 3:
 				break;
-					
-				case 4:
-					
-					Course c= addNewCourse();
-					arrayCourses[numCourses] = c;					
-					numCourses++;
-					
-					break;
-					
-				case 5:
-					
-					deleteCourse();
-					
-					
-					break;
-					
+
+			case 4:
+
+				Course c= addNewCourse();
+				arrayCourses[numCourses] = c;					
+				numCourses++;
+
+				break;
+
+			case 5:
+
+				deleteCourse();
+
+
+				break;
+
+			case 6:
+
+				Hams h= addNewHam();
+				arrayHams[numHams] = h;					
+				numHams++;
+
+				break;
+
+			case 7:
+
+				deleteHam();
+
+
+				break;
+
 			case 0:
 				break;
 			}
@@ -81,6 +97,8 @@ public class MainApp {
 			System.out.println("3. - Delete User (TODO)");
 			System.out.println("4. - Add new course");
 			System.out.println("5. - Delete course");
+			System.out.println("6. - Add Ham");
+			System.out.println("7. - Delete Jam");
 			System.out.println("0. - Exit");
 			try{
 				String option = buffer.readLine();	
@@ -120,7 +138,7 @@ public class MainApp {
 		} while(readingError);
 		return new User(id, name, surname, age);
 	}
-	
+
 	public static void modifyUser(User user){
 		System.out.println("===== Current user data =====");
 		System.out.println(user.toString());
@@ -144,7 +162,7 @@ public class MainApp {
 		}
 
 	}
-	
+
 	public static Course addNewCourse() {
 		int id=0;
 		String name="";
@@ -163,7 +181,7 @@ public class MainApp {
 		} while(readingError);
 		return new Course(id, name);
 	}
-	
+
 	public static void deleteCourse() throws IOException {
 		try {
 
@@ -179,9 +197,9 @@ public class MainApp {
 		}catch(Exception e) {
 			System.out.println("ID does not exists");
 		}
-		
+
 	}
-	
+
 	public static Hams addNewHam() {
 		int id=0;
 		String marca="";
@@ -200,7 +218,7 @@ public class MainApp {
 		} while(readingError);
 		return new Hams(id, marca);
 	}
-	
+
 	public static void deleteHam() throws IOException {
 		try {
 
@@ -216,7 +234,7 @@ public class MainApp {
 		}catch(Exception e) {
 			System.out.println("ID does not exists");
 		}
-		
+
 	}
-	
+
 }
