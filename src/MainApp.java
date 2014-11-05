@@ -3,9 +3,11 @@ import java.io.*;
 public class MainApp {
 
 	private static User arrayUsers[] = new User[10];
+	private static Books arrayBooks[] = new Books[10];
 	private static Course arrayCourses[] = new Course[10];
 	private static int numUsers = 0;
 	private static int numCourses = 0;
+	private static int i = 0;
 	private static BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
 	/**
 	 * Main function
@@ -54,6 +56,16 @@ public class MainApp {
 					
 					
 					break;
+				
+				case 6:
+				
+					addNewBook();
+					
+					break;
+				
+				case 7:
+					
+					
 					
 			case 0:
 				break;
@@ -79,6 +91,8 @@ public class MainApp {
 			System.out.println("3. - Delete User (TODO)");
 			System.out.println("4. - Add new course");
 			System.out.println("5. - Delete course");
+			System.out.println("6. - Add new book");
+			System.out.println("7. - Delete book");
 			System.out.println("0. - Exit");
 			try{
 				String option = buffer.readLine();	
@@ -193,4 +207,35 @@ public class MainApp {
 		
 	}
 	
+	public static Books addNewBook() {
+
+		int id; id = -1;
+		String authorname; authorname = "";
+		boolean readingError;
+		do {
+			try{
+				System.out.println("id:");
+				id = Integer.parseInt(buffer.readLine());
+				System.out.println("Author Name:");
+				authorname = buffer.readLine();
+				readingError = false;
+			}catch(Exception e){
+				System.out.println("Incorrect value!!");
+				readingError = true;
+			}
+		} while(readingError);
+		return new Book(id, authorname);
+	}
+	
+	public static void deleteBook(int id) {
+		
+		for (int i = 0; i < arrayBooks.length; i++) {
+			
+			if(id==arrayBooks[i].getId()) {
+				arrayBooks[i]=null;
+			}
+			
+		}
+		
+	}
 }
