@@ -218,4 +218,16 @@ public class MainApp {
 		return new Author(id, name, surname, age);
 	}
 	
+	public static void deleteAuthor(int id) {
+
+		for (int i = 0; i < arrayAuthor.length; i++) {
+
+			if(id==arrayAuthor[i].getId()) {
+				arrayAuthor[i]=null;
+			}
+
+		}
+
+	}
+	
 }
