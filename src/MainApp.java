@@ -54,6 +54,18 @@ public class MainApp {
 					
 					
 					break;
+				
+				case 6:
+					//add new user
+				break;
+				
+				case 7:
+					//modify exiting actor
+				break;
+				
+				case 8:
+					//delete actor 
+				break;
 					
 			case 0:
 				break;
