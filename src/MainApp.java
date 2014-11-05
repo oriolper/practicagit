@@ -4,8 +4,10 @@ public class MainApp {
 
 	private static User arrayUsers[] = new User[10];
 	private static Course arrayCourses[] = new Course[10];
+	private static Teachers arrayTeachers[] = new Teachers[10];
 	private static int numUsers = 0;
 	private static int numCourses = 0;
+	private static int numTeachers = 0;
 	private static BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
 	/**
 	 * Main function
@@ -55,6 +57,16 @@ public class MainApp {
 					
 					break;
 					
+				case 6:
+					Teachers t= addNewTeachers();
+					arrayTeachers[numTeachers] = t;					
+					numCourses++;
+					break;
+					
+				case 7:
+					deleteTeachers();
+					break;
+					
 			case 0:
 				break;
 			}
@@ -79,6 +91,8 @@ public class MainApp {
 			System.out.println("3. - Delete User (TODO)");
 			System.out.println("4. - Add new course");
 			System.out.println("5. - Delete course");
+			System.out.println("6. - Add new teacher");
+			System.out.println("7. - Delete teacher");
 			System.out.println("0. - Exit");
 			try{
 				String option = buffer.readLine();	
@@ -143,18 +157,6 @@ public class MainApp {
 
 	}
 
-
-	public static void deleteUser(int id) {
-		
-		for (int i = 0; i < arrayUsers.length; i++) {
-			
-			if(id==arrayUsers[i].getId()) {
-				arrayUsers[i]=null;
-			}
-			
-		}
-		
-	}
 	
 	public static Course addNewCourse() {
 		int id=0;
@@ -191,6 +193,60 @@ public class MainApp {
 			System.out.println("ID does not exists");
 		}
 		
+	}
+
+	/**
+	 * Add Teachers
+	 * @return
+	 */
+	public static Teachers addNewTeachers() {
+
+		int id, age; id = age = -1;
+		String name, surname; name = surname = "";
+		boolean readingError;
+		do {
+			try{
+				System.out.println("id:");
+				id = Integer.parseInt(buffer.readLine());
+				System.out.println("Name:");
+				name = buffer.readLine();
+				System.out.println("Surname:");
+				surname = buffer.readLine();
+				System.out.println("age:");
+				age = Integer.parseInt(buffer.readLine());
+				readingError = false;
+			}catch(Exception e){
+				System.out.println("Incorrect value!!");
+				readingError = true;
+			}
+		} while(readingError);
+		return new Teachers(id, name, surname, age);
+	}
+
+	/**
+	 * Delete Teachers
+	 * @return
+	 */
+	public static void deleteTeachers() throws IOException {
+		int id; id = -1;
+
+				BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
+				System.out.println("id:");
+				id = Integer.parseInt(buffer.readLine());
+
+				//Verificamos que el id ya existe
+				int posicion = -1;
+				for(int i=0; i< arrayTeachers.length;i++)
+				{
+					if(arrayTeachers[i] != null && arrayTeachers[i].getId() == id){ 
+						posicion = i;
+					}
+				}
+				//Si no lo encontramos  ... excepcion	
+				if(posicion == -1)System.out.println("ID does not exist!!!");
+
+				//Si lo encontramos lo borramos
+				else arrayTeachers[posicion] = null;
 	}
 	
 }
